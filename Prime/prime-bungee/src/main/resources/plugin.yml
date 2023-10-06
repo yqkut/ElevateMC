@@ -1,0 +1,5 @@
+main: dev.apposed.prime.proxy.PrimeProxy
+name: Prime
+description: All in one Essentials core
+version: 1.0-BETA
+author: Apposed

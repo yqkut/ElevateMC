@@ -1,0 +1,7 @@
+main: dev.apposed.prime.spigot.Prime
+name: Prime
+depend:
+  - eLib
+description: All in one Essentials core
+version: 1.0-BETA
+author: Apposed

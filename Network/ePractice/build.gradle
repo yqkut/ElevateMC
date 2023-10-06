@@ -1,0 +1,81 @@
+plugins {
+    id 'java'
+    id 'org.hidetake.ssh' version '2.10.1'
+}
+
+group 'com.elevatemc'
+version '1.0'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = uri('https://maven.enginehub.org/repo/')
+    }
+    maven {
+        url = uri('https://repo.dmulloy2.net/repository/public/')
+    }
+    maven {
+        url = uri('https://repo.phoenix616.dev')
+    }
+}
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
+dependencies {
+    compileOnly files('../lib/espigot.jar')
+    compileOnly files('../lib/primespigot.jar')
+    compileOnly files('../lib/lcapi.jar')
+    compileOnly project(':eLib')
+    compileOnly 'redis.clients:jedis:4.1.1'
+
+    compileOnly 'com.sk89q:worldedit:6.0.0-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+remotes {
+    webServer {
+        host = '51.222.244.184'
+        user = 'root'
+        password = 'XN9?sx2#8E3L*d_K'
+    }
+}
+
+//task deploy {
+//    doLast {
+//        ssh.run {
+//            session(remotes.webServer) {
+////                put from: './build/libs/ePractice-1.0.jar', into: '/home/practice/plugins/'
+//                put from: '../eLib/build/libs/eLib-1.0-all.jar', into: '/home/betaprac/plugins/'
+//                put from: './build/libs/ePractice-1.0.jar', into: '/home/betaprac/plugins/'
+//                execute 'tmux send -t dev stop ENTER'
+//            }
+//        }
+//    }
+//}
+
+//build {
+//    dependsOn(deploy)
+//}
+
+processResources {
+    def props = [version: 'git rev-parse --verify --short HEAD'.execute().text.trim()]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+ssh.settings {
+    knownHosts = allowAnyHosts
+}

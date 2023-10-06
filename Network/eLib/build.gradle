@@ -1,0 +1,63 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.elevatemc'
+version '1.0'
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.dmulloy2.net/repository/public/'
+    }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly files('../lib/espigot.jar')
+    compileOnly files('../lib/primespigot.jar')
+    compileOnly files('../lib/lcapi.jar')
+    implementation 'org.mongodb:mongo-java-driver:3.12.10'
+    implementation 'redis.clients:jedis:4.2.0'
+    implementation 'org.reflections:reflections:0.10.2'
+
+    shadow 'org.mongodb:mongo-java-driver:3.12.10'
+    shadow 'redis.clients:jedis:4.2.0'
+    shadow 'org.reflections:reflections:0.10.2'
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+}
+
+build {
+    dependsOn(shadowJar)
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
+}
+
+processResources {
+    def props = [version: 'git rev-parse --verify --short HEAD'.execute().text.trim()]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}

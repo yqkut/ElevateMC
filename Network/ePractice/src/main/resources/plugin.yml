@@ -1,0 +1,6 @@
+name: ePractice
+version: '${version}'
+author: ElevateMC Development Team
+main: com.elevatemc.potpvp.PotPvPSI
+depend: [ eLib, WorldEdit ]
+softdepend: [ Prime ]

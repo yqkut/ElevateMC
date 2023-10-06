@@ -1,0 +1,36 @@
+id: 'Staging'
+group: 'Dev'
+
+network:
+  name: "BridgeHCF"
+  appeal: "discord.gg/bridgehcf"
+
+nametag: true
+format: '%prefix%%player%&7: &f%chat%'
+
+staff:
+  join: "&b[S] &r%player% &ajoined &3the network (%prev_server%&3)."
+  leave: "&b[S] &r%player% &cleft &3the network (from %prev_server%&3)."
+  switch: "&b[S] &r%player% &ajoined &3%server% &3(from %prev_server%&3)."
+  chat: "&b[S] &7(%server%) &r%player%&7: &f%message%"
+  admin: "&c[A] &7(%server%) &r%player%&7: &f%message%"
+  manager: "&5[M] &7(%server%) &r%player%&7: &f%message%"
+
+# database credentials
+mongo:
+  host: '127.0.0.1'
+  port: 27017
+  database: 'Prime'
+  auth:
+    enabled: false
+    username: ''
+    password: ''
+    auth-db: 'admin'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  channel: ''
+  auth: false
+  password: ''
+

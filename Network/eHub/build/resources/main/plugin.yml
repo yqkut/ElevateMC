@@ -1,0 +1,7 @@
+main: com.elevatemc.ehub.eHub
+name: eHub
+version: '7227fd6'
+description: The hub plugin for ElevateMC
+author: ElevateMC Development Team
+website: https://elevatemc.com
+depend: [eLib, Prime]

@@ -1,0 +1,20 @@
+id: 'Proxy-NA-01'
+
+# database credentials
+mongo:
+  host: '127.0.0.1'
+  port: 27017
+  database: 'Prime'
+  auth:
+    enabled: false
+    username: ''
+    password: ''
+    auth-db: 'admin'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  channel: ''
+  auth: false
+  password: ''
+

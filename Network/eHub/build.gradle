@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+}
+
+group 'com.elevatemc'
+version '1.0'
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+    compileOnly files('../lib/espigot.jar')
+    compileOnly files('../lib/primespigot.jar')
+    compileOnly files('../lib/universespigot.jar')
+    compileOnly project(':eLib')
+
+    compileOnly 'com.github.koca2000:NoteBlockAPI:1.6.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+processResources {
+    def props = [version: 'git rev-parse --verify --short HEAD'.execute().text.trim()]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}

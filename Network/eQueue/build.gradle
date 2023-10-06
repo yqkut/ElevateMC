@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'com.elevatemc'
+version '1.0'
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.resources.srcDirs = ['src/main/resources']
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://papermc.io/repo/repository/maven-public/'
+    }
+}
+
+
+dependencies {
+    compileOnly files('../lib/primevelocity.jar')
+    compileOnly 'com.velocitypowered:velocity-api:3.0.1'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.0.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+processResources {
+    def props = [version: 'git rev-parse --verify --short HEAD'.execute().text.trim()]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('bungee.yml') {
+        expand props
+    }
+}

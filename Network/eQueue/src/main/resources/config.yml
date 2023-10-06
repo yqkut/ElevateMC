@@ -1,0 +1,8 @@
+# The speed of the queue system defined in seconds
+speed: 1
+
+# The queues
+queues:
+  practice:
+    server: "Practice"
+    enabled: true

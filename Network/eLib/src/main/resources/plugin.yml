@@ -1,0 +1,5 @@
+name: eLib
+version: ${version}
+main: com.elevatemc.elib.eLib
+depend:
+  - LunarClient-API
